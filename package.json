@@ -1,5 +1,5 @@
 {
-  "name": "format",
+  "name": "ts-item-format",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
@@ -12,15 +12,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/calyssonc/format.git"
+    "url": "git+https://github.com/calyssonc/ts-item-format.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/calyssonc/format/issues"
+    "url": "https://github.com/calyssonc/ts-item-format/issues"
   },
-  "homepage": "https://github.com/calyssonc/format#readme",
+  "homepage": "https://github.com/calyssonc/ts-item-format#readme",
   "devDependencies": {
     "typescript": "^5.0.4"
   },
