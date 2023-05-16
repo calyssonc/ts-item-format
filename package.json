@@ -1,7 +1,7 @@
 {
   "name": "ts-item-format",
-  "version": "1.0.1",
-  "description": "",
+  "version": "1.0.2",
+  "description": "A utility library for formatting and transforming data objects and arrays in TypeScript",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -14,7 +14,19 @@
     "type": "git",
     "url": "git+https://github.com/calyssonc/ts-item-format.git"
   },
-  "keywords": [],
+  "keywords": [
+    "typescript",
+    "formatting",
+    "transformation",
+    "data",
+    "objects",
+    "utility",
+    "library",
+    "format",
+    "formatArray",
+    "DTO",
+    "Data Transfer Object"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {
