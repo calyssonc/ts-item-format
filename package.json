@@ -34,9 +34,7 @@
   },
   "homepage": "https://github.com/calyssonc/ts-item-format#readme",
   "devDependencies": {
-    "typescript": "^5.0.4"
-  },
-  "dependencies": {
+    "typescript": "^5.0.4",
     "ts-node": "^10.9.1"
   }
 }
