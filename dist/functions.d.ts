@@ -2,15 +2,15 @@ type FilterableKeys<T> = Extract<keyof T, string>;
 type RenamedProperties<T> = {
     [K in keyof T]?: string;
 };
-type TransformFn<T, R> = {
-    [K in keyof T]?: (value: T[K], data?: T) => R[keyof R];
+type TransformFn<T> = {
+    [K in keyof T]?: (value: T[K], data?: T) => any;
 };
 interface IFormatProperties<T extends Record<string, any>, R> {
     data: T;
     properties?: FilterableKeys<T>[];
     excludedProperties?: FilterableKeys<T>[];
     renamedProperties?: RenamedProperties<T>;
-    transformFn?: TransformFn<T, R>;
+    transformFn?: TransformFn<T>;
     filterNullsAndInvalids?: boolean;
     addProperties?: Partial<R>;
 }

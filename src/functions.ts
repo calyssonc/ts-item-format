@@ -4,8 +4,8 @@ type RenamedProperties<T> = {
   [K in keyof T]?: string;
 };
 
-type TransformFn<T, R> = {
-  [K in keyof T]?: (value: T[K], data?: T) => R[keyof R];
+type TransformFn<T> = {
+  [K in keyof T]?: (value: T[K], data?: T) => any;
 };
 
 interface IFormatProperties<T extends Record<string, any>, R> {
@@ -13,14 +13,14 @@ interface IFormatProperties<T extends Record<string, any>, R> {
   properties?: FilterableKeys<T>[];
   excludedProperties?: FilterableKeys<T>[];
   renamedProperties?: RenamedProperties<T>;
-  transformFn?: TransformFn<T, R>;
+  transformFn?: TransformFn<T>;
   filterNullsAndInvalids?: boolean;
   addProperties?: Partial<R>;
 }
 
-const transformValue = <T, R>(
-  value: TransformFn<T, R>,
-  transformFn?: (value: TransformFn<T, R>, data?: any) => any,
+const transformValue = <T>(
+  value: TransformFn<T>,
+  transformFn?: (value: TransformFn<T>, data?: any) => any,
   data?: any
 ) => {
   return transformFn ? transformFn(value, data) : value;
@@ -60,7 +60,7 @@ export const format = <
     const newKey = renamedProperties?.[key as keyof T] ?? key;
     const isTransformFnDefinedForKey = transformFn?.[key as keyof T];
 
-    let oldValue: TransformFn<T, R>;
+    let oldValue: TransformFn<T>;
     if (isKeyInData) oldValue = data[key as keyof T];
     if (isKeyInAddProperties) oldValue = addProperties[key];
 
