@@ -24,8 +24,8 @@ var format = function (_a) {
         var isExcluded = excludedProperties === null || excludedProperties === void 0 ? void 0 : excludedProperties.includes(key);
         if (isExcluded)
             return obj;
-        var isKeyInData = Object.prototype.hasOwnProperty.call(data, key);
-        var isKeyInAddProperties = Object.prototype.hasOwnProperty.call(addProperties, key);
+        var isKeyInData = data[key] !== undefined;
+        var isKeyInAddProperties = addProperties[key] !== undefined;
         var newKey = (_a = renamedProperties === null || renamedProperties === void 0 ? void 0 : renamedProperties[key]) !== null && _a !== void 0 ? _a : key;
         var isTransformFnDefinedForKey = transformFn === null || transformFn === void 0 ? void 0 : transformFn[key];
         var oldValue;

@@ -51,8 +51,8 @@ export const format = <
     const isExcluded = excludedProperties?.includes(key as FilterableKeys<T>);
     if (isExcluded) return obj;
 
-    const isKeyInData = !!data[key];
-    const isKeyInAddProperties = !!addProperties[key];
+    const isKeyInData = data[key] !== undefined;
+    const isKeyInAddProperties = addProperties[key] !== undefined;
 
     const newKey = renamedProperties?.[key as keyof T] ?? key;
     const isTransformFnDefinedForKey = transformFn?.[key as keyof T];
