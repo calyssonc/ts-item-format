@@ -8,6 +8,10 @@ type TransformFn<T> = {
   [K in keyof T]?: (value: T[K], data?: T) => any;
 };
 
+type AddPropertiesFn<R> = {
+  [key: string]: (data: R) => any;
+};
+
 interface IFormatProperties<T extends Record<string, any>, R> {
   data: T;
   properties?: FilterableKeys<T>[];
@@ -15,7 +19,7 @@ interface IFormatProperties<T extends Record<string, any>, R> {
   renamedProperties?: RenamedProperties<T>;
   transformFn?: TransformFn<T>;
   filterNullsAndInvalids?: boolean;
-  addProperties?: Partial<R>;
+  addProperties?: AddPropertiesFn<R>;
 }
 
 const transformValue = <T>(
@@ -24,6 +28,14 @@ const transformValue = <T>(
   data?: any
 ) => {
   return transformFn ? transformFn(value, data) : value;
+};
+
+const addPropertie = <R>(
+  value: AddPropertiesFn<R>,
+  addPropertieFn?: (data?: any) => any,
+  data?: any
+) => {
+  return addPropertieFn ? addPropertieFn(data) : value;
 };
 
 export const format = <
@@ -35,13 +47,15 @@ export const format = <
   excludedProperties,
   renamedProperties,
   transformFn,
+  addProperties = {}, // It needs to be an empty object because of the spread in combinedProperties
   filterNullsAndInvalids = true,
-  addProperties = {},
 }: IFormatProperties<T, R>): R => {
   if (data === undefined || data === null) return data as unknown as R;
 
+  // If you do not pass the keys of the properties that will be returned, they will all be selected
   const pickedProperties = properties.length ? properties : Object.keys(data);
 
+  // Combines the properties that were selected with new properties that will be added
   const combinedProperties = [
     ...pickedProperties,
     ...Object.keys(addProperties),
@@ -52,19 +66,24 @@ export const format = <
     if (isExcluded) return obj;
 
     const isKeyInData = data[key] !== undefined;
-    const isKeyInAddProperties = addProperties[key] !== undefined;
 
     const newKey = renamedProperties?.[key as keyof T] ?? key;
     const isTransformFnDefinedForKey = transformFn?.[key as keyof T];
+    const isAddPropertiesFnDefinedForKey = addProperties?.[key];
 
     let oldValue: TransformFn<T>;
     if (isKeyInData) oldValue = data[key as keyof T];
-    if (isKeyInAddProperties) oldValue = addProperties[key];
+
+    const addedPropertie = addPropertie(
+      oldValue as Partial<R>,
+      isAddPropertiesFnDefinedForKey,
+      data
+    );
 
     const value = transformValue(
-      oldValue,
+      addedPropertie,
       isTransformFnDefinedForKey,
-      isKeyInData ? data : addProperties
+      data
     );
 
     const invalidValue = value === null || value === undefined;

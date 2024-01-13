@@ -5,6 +5,9 @@ type RenamedProperties<T> = {
 type TransformFn<T> = {
     [K in keyof T]?: (value: T[K], data?: T) => any;
 };
+type AddPropertiesFn<R> = {
+    [key: string]: (data: R) => any;
+};
 interface IFormatProperties<T extends Record<string, any>, R> {
     data: T;
     properties?: FilterableKeys<T>[];
@@ -12,9 +15,9 @@ interface IFormatProperties<T extends Record<string, any>, R> {
     renamedProperties?: RenamedProperties<T>;
     transformFn?: TransformFn<T>;
     filterNullsAndInvalids?: boolean;
-    addProperties?: Partial<R>;
+    addProperties?: AddPropertiesFn<R>;
 }
-export declare const format: <T extends Record<string, any>, R extends Record<string, any> = T>({ data, properties, excludedProperties, renamedProperties, transformFn, filterNullsAndInvalids, addProperties, }: IFormatProperties<T, R>) => R;
+export declare const format: <T extends Record<string, any>, R extends Record<string, any> = T>({ data, properties, excludedProperties, renamedProperties, transformFn, addProperties, filterNullsAndInvalids, }: IFormatProperties<T, R>) => R;
 interface IFormatArray<T extends Record<string, any>, R> extends Omit<IFormatProperties<T, R>, "data"> {
     data: T[];
 }
