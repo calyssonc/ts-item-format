@@ -1,6 +1,6 @@
 {
   "name": "ts-item-format",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A utility library for formatting and transforming data objects and arrays in TypeScript",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

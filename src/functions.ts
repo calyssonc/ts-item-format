@@ -109,6 +109,7 @@ export const formatArray = <
   excludedProperties,
   renamedProperties,
   transformFn,
+  addProperties,
   filterNullsAndInvalids,
 }: IFormatArray<T, R>): R[] => {
   if (!data?.length) return data as unknown as R[];
@@ -120,6 +121,7 @@ export const formatArray = <
       excludedProperties,
       renamedProperties,
       transformFn,
+      addProperties,
       filterNullsAndInvalids,
     })
   );
