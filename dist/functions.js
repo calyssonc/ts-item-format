@@ -49,7 +49,7 @@ var format = function (_a) {
 };
 exports.format = format;
 var formatArray = function (_a) {
-    var data = _a.data, properties = _a.properties, excludedProperties = _a.excludedProperties, renamedProperties = _a.renamedProperties, transformFn = _a.transformFn, filterNullsAndInvalids = _a.filterNullsAndInvalids;
+    var data = _a.data, properties = _a.properties, excludedProperties = _a.excludedProperties, renamedProperties = _a.renamedProperties, transformFn = _a.transformFn, addProperties = _a.addProperties, filterNullsAndInvalids = _a.filterNullsAndInvalids;
     if (!(data === null || data === void 0 ? void 0 : data.length))
         return data;
     return data.map(function (item) {
@@ -59,6 +59,7 @@ var formatArray = function (_a) {
             excludedProperties: excludedProperties,
             renamedProperties: renamedProperties,
             transformFn: transformFn,
+            addProperties: addProperties,
             filterNullsAndInvalids: filterNullsAndInvalids,
         });
     });

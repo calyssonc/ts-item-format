@@ -21,5 +21,5 @@ export declare const format: <T extends Record<string, any>, R extends Record<st
 interface IFormatArray<T extends Record<string, any>, R> extends Omit<IFormatProperties<T, R>, "data"> {
     data: T[];
 }
-export declare const formatArray: <T extends Record<string, any>, R extends Record<string, any> = T>({ data, properties, excludedProperties, renamedProperties, transformFn, filterNullsAndInvalids, }: IFormatArray<T, R>) => R[];
+export declare const formatArray: <T extends Record<string, any>, R extends Record<string, any> = T>({ data, properties, excludedProperties, renamedProperties, transformFn, addProperties, filterNullsAndInvalids, }: IFormatArray<T, R>) => R[];
 export {};
